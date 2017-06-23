@@ -1,0 +1,62 @@
+/* BEGIN STICKY FOOTER STUFF */
+
+.site {
+  min-height: 100vh; 
+}
+
+.main {
+  flex: 1;
+  min-width: 100%;
+  max-width: 100%;
+}
+
+.navbar {
+  min-width: 100%;
+}
+
+.footer {
+  min-width: 100%;
+}
+
+/* END STICKY FOOTER STUFF */
+
+
+
+#mainLogo {
+  height: 32px;
+  width: 32px
+}
+
+a, button {
+  cursor: pointer;
+}
+
+.card-header {
+  background-color: silver;
+}
+
+#errorMessage {
+  text-align: center;
+/*  font-weight: bold;
+  font-style: italic;*/
+}
+
+/*.listings {
+  float: right;
+}*/
+
+.scrapeTotal {
+  float: left;
+}
+
+.scrapeIndividual {
+  float: right;
+}
+
+#resultTitle, #resultURL {
+  overflow-wrap: break-word;
+}
+
+.footer {
+  text-align: center;
+}
