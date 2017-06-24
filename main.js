@@ -55,9 +55,11 @@ function createWindow() {
     // DUMMY DATA
 
     var testing = [
-        { url: "https://en.wikipedia.org/wiki/Knowledge" },
-        { url: "https://en.wikipedia.org/wiki/Culture" },
-        { url: "https://en.wikipedia.org/wiki/Main_Page" }
+        { url: "https://www.import.io/post/how-to-crawl-a-website-the-right-way/" },
+        { url: "https://www.deepcrawl.com/help/guides/how-crawl-website-with-deepcrawl/" },
+        { url: "https://varvy.com/howmanylinks.html" }
+
+
     ];
 
     axios.post("http://localhost:3000/queue", testing).then(function(response) {
@@ -153,7 +155,7 @@ function createWindow() {
                                         console.log("==========================================")
                                         console.log("Scraped data sent to the Server #/index")
                                         console.log("==========================================")
-                                        axios.post("http://localhost:3000/index", resultArray).then(response2 => {
+                                        axios.post("http://localhost:3000/indexs", resultArray).then(response2 => {
                                             console.log(response2);
                                         })
                                     }
@@ -165,7 +167,7 @@ function createWindow() {
                                         console.log("==========================================")
                                         console.log("Scraped data sent to the Server #/index")
                                         console.log("==========================================")
-                                        axios.post("http://localhost:3000/index", resultArray).then(response2 => {
+                                        axios.post("http://localhost:3000/indexs", resultArray).then(response2 => {
                                             console.log(response2);
                                         })
                                     }
