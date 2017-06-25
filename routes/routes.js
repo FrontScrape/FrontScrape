@@ -23,10 +23,12 @@ module.exports = function(app, io, Page, Queue, User) {
         });
     });
 
-    app.post('/index', (req, res) => {
+    app.post('/indexs', (req, res) => {
+
         console.log("====================================")
         console.log("Scraped data received #/index")
         console.log("====================================")
+
 
 
         req.body.forEach(element => {
@@ -46,7 +48,6 @@ module.exports = function(app, io, Page, Queue, User) {
                                         console.log("error in saving Queue")
                                         console.error(err);
                                     } else {
-
                                     }
                                 })
 
@@ -85,6 +86,7 @@ module.exports = function(app, io, Page, Queue, User) {
                 console.log("====================================")
                 Queue.find({}).limit(10).remove().exec();
                 console.log("Removing scraped URLs from Queue db")
+
                 res.json(doc);
             }
         });
@@ -144,10 +146,10 @@ module.exports = function(app, io, Page, Queue, User) {
     });
 
     app.get('/totalScore', function(req, res) {
-    	Page.count({}, function(err, c) {
-    		if (err) console.log(err);
-    		res.json(c);
-    	});
+        Page.count({}, function(err, c) {
+            if (err) console.log(err);
+            res.json(c);
+        });
     });
 
     // JOHN'S STUFF (MOSTLY PASSPORT AUTH AND INDIVIDUAL ACCOUNT STUFF) ENDS HERE
