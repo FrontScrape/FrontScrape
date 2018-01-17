@@ -32,7 +32,6 @@ module.exports = function(app, io, Page, Queue, User) {
         req.body.forEach(element => {
             var newElement = JSON.parse(element)
             new Page(newElement).save((err, doc) => {
-
                 if (err) {
                     console.error(err);
                 } else {
@@ -46,13 +45,14 @@ module.exports = function(app, io, Page, Queue, User) {
                                         console.log("error in saving Queue")
                                         console.error(err);
                                     } else {
-
+                                        res.end();
                                     }
                                 })
 
                             }
                         })
                     });
+
                 }
             });
         });
@@ -75,15 +75,31 @@ module.exports = function(app, io, Page, Queue, User) {
     //Calling Queues from the db
     app.post('/queues', (req, res) => {
         var q = Queue.find({}).limit(10);
+
         q.exec(function(err, doc) {
             if (err) {
-                console.log("error");
+                console.log("error while trying to find the next ques from the db");
                 res.json(err);
             } else {
                 console.log("====================================")
                 console.log("List of URLs sent to client #/queues")
                 console.log("====================================")
-                Queue.find({}).limit(10).remove().exec();
+                var removeIdlist = Queue.find({}, { _id: 1 }).limit(10);
+
+                removeIdlist.exec(function(err, doc1) {
+                    if (err) {
+                        console.log("error while trying to remove ques from the database")
+                    } else {
+                        for (var i = 0; i < doc1.length; i++) {
+                            console.log("docID", doc1[i]._id)
+                            Queue.find({ _id: doc1[i]._id }).remove().exec();
+                            app.get('/user', function(req1, res1) {
+                                console.log("user", req1.user)
+                                res1.json(req1.user);
+                            });
+                        }
+                    }
+                })
                 console.log("Removing scraped URLs from Queue db")
                 res.json(doc);
             }
@@ -144,10 +160,10 @@ module.exports = function(app, io, Page, Queue, User) {
     });
 
     app.get('/totalScore', function(req, res) {
-    	Page.count({}, function(err, c) {
-    		if (err) console.log(err);
-    		res.json(c);
-    	});
+        Page.count({}, function(err, c) {
+            if (err) console.log(err);
+            res.json(c);
+        });
     });
 
     // JOHN'S STUFF (MOSTLY PASSPORT AUTH AND INDIVIDUAL ACCOUNT STUFF) ENDS HERE

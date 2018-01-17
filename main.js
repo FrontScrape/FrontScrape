@@ -54,15 +54,22 @@ function createWindow() {
 
     // DUMMY DATA
 
-    var testing = [
-        { url: "https://en.wikipedia.org/wiki/Knowledge" },
-        { url: "https://en.wikipedia.org/wiki/Culture" },
-        { url: "https://en.wikipedia.org/wiki/Main_Page" }
-    ];
+    // var testing = [
+    //     { url: "https://en.wikipedia.org/wiki/Supernatural_fiction" },
+    //     { url: "https://en.wikipedia.org/wiki/Science_fiction" },
+    //     { url: "https://en.wikipedia.org/wiki/Rod_Serling" },
+    //     { url: "https://en.wikipedia.org/wiki/Talk:Rod_Serling#.23" },
+    //     { url: "https://en.wikipedia.org/wiki/Wikipedia:Neutral_point_of_view/" },
+    //     { url: "https://en.wikipedia.org/wiki/Wikipedia:Policies_and_guidelines" },
+    //     { url: "https://en.wikipedia.org/wiki/Category:Wikipedia_procedural_policies" },
+    //     { url: "https://en.wikipedia.org/wiki/Wikipedia:Open_proxies/" }
+    // ];
 
-    axios.post("http://localhost:3000/queue", testing).then(function(response) {
-        console.log("connecting")
-    })
+    // axios.post("http://localhost:3000/queue", testing).then(function(response) {
+    //     console.log("connecting")
+    // })
+
+
 
     // DUMMY DATA
 
@@ -144,23 +151,22 @@ function createWindow() {
                                     words.forEach(function(obj) {
                                         result.searchables.push(obj.word.toLowerCase())
                                     })
-                                    console.log(result.title)
                                         // result.searchables.concat(result.title.split(" "))
                                     resultArray.push(JSON.stringify(result))
                                     count++
-                                    console.log(count)
                                     if (count == (urlArray.length)) {
                                         console.log("==========================================")
                                         console.log("Scraped data sent to the Server #/index")
                                         console.log("==========================================")
+                                        
                                         axios.post("http://localhost:3000/index", resultArray).then(response2 => {
+
                                             console.log(response2);
                                         })
                                     }
 
                                 } else {
                                     count++
-                                    console.log(count)
                                     if (count == (urlArray.length)) {
                                         console.log("==========================================")
                                         console.log("Scraped data sent to the Server #/index")
@@ -177,7 +183,83 @@ function createWindow() {
             })
         })
     }, 15000)
+        // fetch("http://localhost:3000/queues")
+        //     .then(res=>{
+        //         console.log(res)
+        //     })
 
+
+    // mainWindow.loadURL('https://www.facebook.com');
+    // var testing1 = ["https://en.wikipedia.org/wiki/Knowledge", "http://duckysoftware.com"];
+
+
+
+    // //SCRAPING STARTS HERE
+    // testing1.forEach(function(link) {
+    //     var pageurl = link;
+    //     var options = {
+    //         site: pageurl,
+
+    //         // only include words with at least n occurences, default 0 (no threshold) 
+    //         threshold: 5,
+
+    //         // limit output count, default 0 (no limit) 
+    //         limit: 20,
+
+    //         // css element(s) to get keywords from, default 'body' 
+    //         element: 'body',
+
+    //         // exclude keywords, default [] 
+    //         exclude: []
+    //     };
+    //     request(pageurl, function(error, response, html) {
+    //         //We load that into cheerio and save it to $ for a shorthand selector
+    //         var $ = cheerio.load(html);
+    //         var result = {
+    //             pageurl: pageurl,
+    //             title: null,
+    //             links: [],
+    //             searchables: [],
+    //             pagescore: 0
+    //         };
+    //         $("title").each(function(i, element) {
+
+    //             result.title = $(this).text();
+
+    //             //using our Article model, create a new entry
+    //             //This effectively passes the result object to the entry
+    //         });
+    //         $('a').each(function(i, element) {
+    //             if ($(this).attr("href") !== undefined) {
+    //                 var temp = $(this).attr("href")
+    //                 if (temp.startsWith("https://") || temp.startsWith("http://")) {
+    //                     result.links.push(temp);
+    //                 } else if (temp.startsWith("/")) {
+    //                     result.links.push(pageurl + temp)
+    //                 }
+    //             }
+    //         });
+
+    //         miner(
+    //             options,
+    //             (error, words) => {
+    //                 if (error)
+    //                     throw error;
+    //                 // console.log(result.title.split(" "))
+    //                 // console.log(words)
+
+    //                 words.forEach(function(obj) {
+    //                     result.searchables.push(obj.word.toLowerCase())
+    //                 })
+    //                 result.searchables.concat(result.title.split(" "))
+    //                 resultArray.push(JSON.stringify(result))
+    //                 console.log(resultArray)
+    //             }
+    //         );
+    //     })
+    // })
+    // Open the DevTools.
+    // mainWindow.webContents.openDevTools()
 
     // Emitted when the window is closed.
     mainWindow.on('closed', function() {
@@ -186,7 +268,6 @@ function createWindow() {
         // when you should delete the corresponding element.
         mainWindow = null
     })
-
 }
 
 // This method will be called when Electron has finished
