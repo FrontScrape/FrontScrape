@@ -71,6 +71,7 @@ function createWindow() {
 
 
 
+
     // DUMMY DATA
 
 
@@ -161,6 +162,7 @@ function createWindow() {
                                         
                                         axios.post("http://localhost:3000/index", resultArray).then(response2 => {
 
+
                                             console.log(response2);
                                         })
                                     }
@@ -171,7 +173,7 @@ function createWindow() {
                                         console.log("==========================================")
                                         console.log("Scraped data sent to the Server #/index")
                                         console.log("==========================================")
-                                        axios.post("http://localhost:3000/index", resultArray).then(response2 => {
+                                        axios.post("http://localhost:3000/indexs", resultArray).then(response2 => {
                                             console.log(response2);
                                         })
                                     }

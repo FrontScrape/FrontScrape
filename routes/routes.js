@@ -23,10 +23,12 @@ module.exports = function(app, io, Page, Queue, User) {
         });
     });
 
-    app.post('/index', (req, res) => {
+    app.post('/indexs', (req, res) => {
+
         console.log("====================================")
         console.log("Scraped data received #/index")
         console.log("====================================")
+
 
 
         req.body.forEach(element => {
@@ -45,7 +47,10 @@ module.exports = function(app, io, Page, Queue, User) {
                                         console.log("error in saving Queue")
                                         console.error(err);
                                     } else {
+<<<<<<< HEAD
                                         res.end();
+=======
+>>>>>>> eae45bbc59481df47f9500d65951332c693719a7
                                     }
                                 })
 
@@ -101,6 +106,7 @@ module.exports = function(app, io, Page, Queue, User) {
                     }
                 })
                 console.log("Removing scraped URLs from Queue db")
+
                 res.json(doc);
             }
         });
